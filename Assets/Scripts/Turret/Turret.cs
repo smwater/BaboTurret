@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,14 @@ public class Turret : MonoBehaviour
 
     private float _respawnTime = 0f;
     private bool _isShoot = false;
+    private float _minRange = -sqrt(3) / 2.0f;
+    private const float _maxRange = 0f;
+
+    private static int sqrt(int v)
+    {
+        throw new NotImplementedException();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +32,10 @@ public class Turret : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (_isShoot)
+        if (_isShoot && FindRange())
         {
             Debug.Log("¸ñÇ¥ Æ÷Âø");
             playerPosition = new Vector3(Player.position.x, transform.position.y, Player.position.z);
-            gameObject.transform.LookAt(playerPosition);
 
             if (timer >= _respawnTime)
             {
@@ -37,6 +45,19 @@ public class Turret : MonoBehaviour
                 timer = 0f;
             }
         }
+    }
+
+    private bool FindRange()
+    {
+        Vector3 distanceVector = Player.position - transform.position;
+        Debug.Log(Vector3.Dot(transform.forward, distanceVector.normalized));
+
+        if (Vector3.Dot(transform.forward, distanceVector) > _minRange && Vector3.Dot(transform.forward, distanceVector) < _maxRange)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void OnTriggerEnter(Collider other)

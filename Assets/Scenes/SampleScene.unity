@@ -1018,6 +1018,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 677131284}
+    - target: {fileID: 7634327548794353170, guid: 08c4d754455ec364d9e7a1cfe8e6af97, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 677131279}
     - target: {fileID: 7634327548794353171, guid: 08c4d754455ec364d9e7a1cfe8e6af97, type: 3}
       propertyPath: m_Name
       value: Turret
